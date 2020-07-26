@@ -10,8 +10,8 @@ script {
 
 pipeline {
 agent {
-		node {
-			label 'Worker'
+	node {
+		label 'Worker'
 		}
 	}
   stages {
@@ -33,17 +33,19 @@ agent {
                 SSH_AGENT_ID = 'rainbow-dev'
                 sshagent([SSH_AGENT_ID]) {
                             sh """ssh ftamimi@machine-ip -o StrictHostKeyChecking=no << EOF
-                            pwd
-                            cd /var/www/html/brandvoice_v2
+			    echo switching to new directory
+                            cd /var/www/html/some-project
                             pwd
                             sudo su
+			    echo running grunt steps
                             grunt gcpdev
+			    echo restarting servers
                             pm2 restart all
                             exit
                             exit
                             EOF"""
 
-                        }
+                    }
                 }
             }
         }
