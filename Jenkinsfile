@@ -33,13 +33,13 @@ agent {
                 SSH_AGENT_ID = 'rainbow-dev'
                 sshagent([SSH_AGENT_ID]) {
                             sh """ssh ftamimi@machine-ip -o StrictHostKeyChecking=no << EOF
-			    echo switching to new directory
+			            echo switching to new directory
                             cd /var/www/html/some-project
                             pwd
                             sudo su
-			    echo running grunt steps
+			            echo running grunt steps
                             grunt gcpdev
-			    echo restarting servers
+			            echo restarting servers
                             pm2 restart all
                             exit
                             exit
